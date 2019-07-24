@@ -92,11 +92,14 @@ Because of the data imbalance, I cannot only use recall and accuracy as metrics 
 # Results and Discussion
 
 ## Customer Segmentation
+![Customer Segmentation Workflow](workflow.png "Workflow of Customer Segmentation")
 --------------
 ### Data Preprocessing
 
 #### Missing Value Dictionary
 After long hours of manual work, I general a csv file documented the missing value of every attributes mentions inside the meta-data file.
+
+![](feature.jpg "Workflow of Customer Segmentation")
 
 * Delete the variables found in the meta-data file but not found in the general population.
 
@@ -104,16 +107,27 @@ After long hours of manual work, I general a csv file documented the missing val
 
 First I append these variables inside the missing value manual file to enlarge our missing value documentation for further NA analysis. Then I replace those missing_or_unknown inside the dataset with NaN.
 
+![](new_feature.jpg "Workflow of Customer Segmentation")
+
 #### Assess Missing Data
-By plotting the percentage of missing value in each variables, I are able to tell that most of the variables are missing less than 30% of data. Therefore, it is reasonable to set 30% as a cutoff value to clean our data. I drop the variables that have over 30% missing values.
+
+![](access_NA.jpg "Workflow of Customer Segmentation")
+
+By plotting the percentage of missing value in each variables, I am able to tell that most of the variables are missing less than 30% of data.
+
+![](assess_NA_3.jpg)
+
+Therefore, it is reasonable to set 30% as a cutoff value to clean our data. I drop the variables that have over 30% missing values.
 
 ### Re-encode features
 
 #### Variables Type Identification
 
-Inside the *new_feature.csv*, I already identified most of the data variable types. HoIver, after including some new variables from the general population dataset, I need to further investigate the data distribution of these new variables and try to identify their data types.
+Inside the *new_feature.csv*, I already identified most of the data variable types. However, after including some new variables from the general population dataset, I need to further investigate the data distribution of these new variables and try to identify their data types.
 
-For example, the variable *** has 10 types of output, which means it could possibly be a categorical or ordinal variable. Combining with the data name and compared it with the existing variable names in our meta-data files, I can assume that this is an ordinal variable.
+![](egvariable.jpg)
+
+For example, the variable VK_ZG11 has 10 types of output, which means it could possibly be a categorical or ordinal variable. Combining with the data name and compared it with the existing variable names in our meta-data files, I can assume that this is an ordinal variable.
 
 After tedious manual work, I can roughly classify our new variables into numerical, ordinal, categorical and mixed data types.
 
@@ -123,7 +137,11 @@ For the categorical variable, I can go further and identify that whether they ar
 
 ##### Mixed-Type variables
 
-After taking a look at several project reports online, I realize that this Mixed-Type variables engineering is the key point to boost your prediction result in Kaggle competition. There are totally 6 variables that are mixed types. By digging into the definition of every variables via meta-data files, I choose to reengineer the 'PRAEGENDE_JUGENDJAHRE' and 'CAMEO_INTL_2015'.
+After taking a look at several project reports online, I realize that this Mixed-Type variables engineering is the key point to boost your prediction result in Kaggle competition. There are totally 6 variables that are mixed types.
+
+![](mixed_feature.jpg)
+
+By digging into the definition of every variables via meta-data files, I choose to reengineer the 'PRAEGENDE_JUGENDJAHRE' and 'CAMEO_INTL_2015'.
 
 * *PRAEGENDE_JUGENDJAHRE* - combines information on three dimensions: generation by decade, movement (mainstream vs. avantgarde), and nation (east vs. west). Three new variables will be created to capture the other two dimensions: an interval-type variable for decade, and two binary variables for movement and nation.
 
@@ -138,7 +156,11 @@ Other mixed types variables we be converted using one-hot encoding into several 
 After formatting the strategy in cleaning data, I build a clean_data function in order to process the incoming new dataset in the same way.
 
 ### Feature transformations
-After replacing missing value with column' mean and scale our data, it is natural to perform dimension reduction for computational simplicity. By reducing the dimensions to 300, the first 300 components can still explain 86% of our data.
+After replacing missing value with column' mean and scale our data, it is natural to perform dimension reduction for computational simplicity.
+
+![](pca.jpg)
+
+By reducing the dimensions to 300, the first 300 components can still explain 86% of our data.
 
 ### Component analysis
 For each principal component or dimension, the top 3 and bottom 3 weights with their corresponding feature names will be investigated for any associations.
@@ -175,15 +197,33 @@ The third principal component increases with more recent decade of the dominatin
 
 ### Clustering analysis
 #### Pick number of clusters
-The scree plot shows that the score or the sum of the squared errors (SSE) generally decreased as the number of clusters increased. As the instruction suggested, the maximum clusters used was 30. The 'elbow method' is not applicable in the plot because there is no visible leveling observed. Even though 30 clusters did not produce the lowest SSE, it was still used as the number of clusters for the full KMeans clustering operation.
+The scree plot shows that the score or the sum of the squared errors (SSE) generally decreased as the number of clusters increased.
 
+![](ncluster.jpg)
+
+The 'elbow method' is not applicable in the plot because there is no visible leveling observed. Even though 30 clusters did not produce the lowest SSE, it was still used as the number of clusters for the full KMeans clustering operation.
+![](clustergp.png)
+
+![](clusterct.png)
 #### Compare Customers to general Population
-After calculating the proportion difference between 2 datasets' clusters, I can tell that cluster 8 is over-represented and cluster 23 is under-represented. For simplicity, I only compared the variables mentioned in the PCA sections. By comparing these two clusters, four out of the ten features above are clearly different. These are FINANZ_ANLEGER, DECADE,PLZ8_ANTG1 and MOBI_REGIO. The target customers are less mobile, less recent dominating movement in their youths which probably means they are older, and have very low to none transactions in the past 24 months.
+![](diff.png)
+
+After calculating the proportion difference between 2 datasets' clusters, I can tell that cluster 2 is over-represented and cluster 22 is under-represented. For simplicity, I only compared the variables mentioned in the PCA sections.
+
+![](groupdiff.png)
+
+By comparing these two clusters, two out of the ten features above are clearly different. These are FINANZ_ANLEGER, DECADE. The target customers have less recent dominating movements in their youths which probably means they are older, and have less potential to invest.
 
 -----------
 ## Customer Conversion Prediction
 ### Data Exploration
-The response of our data is highly unbalanced. There are a number of approaches to deal with class imbalance which have been already explained by numerous blog posts from different experts. This particular article from Analytics Vidhya describes the following techniques:
+![](capston.png)
+
+The response of our data is highly imbalanced.
+
+![](mailout.png)
+
+There are a number of approaches to deal with class imbalance which have been already explained by numerous blog posts from different experts. This particular article from Analytics Vidhya describes the following techniques:
 * Random Over-sampling
 * Random Under-sampling
 * Cluster-Based Over-sampling
@@ -201,11 +241,26 @@ The above approaches deals with handling imbalanced data by resampling original 
 The AdaBoost,XGBoost and Gradient Tree Boost algorithms will be investigated to determine which is best at modeling the data.
 
 ### Model Selection and Tuning
+
+![](model.png)
+
 After running 3 baseline models, the Gradient Tree Boosting method actually beats other two methods by a small margin. However, the difference is not that much between XGBoost and Gradient Tree Boosting. Considering the training time and tuning time, I will still choose XGBoost. And here is the output of variable importance using the fine-tuned model. The top 10 variables are:
+
+![](varimp.jpg)
+
+* KBA13_SEG_UTILITIES - share of MUVs/SUVs
+* D19_RATGEBER_RZ - transactional activity based on the product group GUIDEBOOKS
+* LP_LEBENSPHASE_GROB - lifestage rough
+* KBA05_GBZ - number of buildings in the microcell
+* ZABEOTYP - typification of energy consumers
+* PLZ8_GBZ - number of buildings within the PLZ8
+* OST_WEST_KZ - flag indicating the former GDR/FRG
 
 ------------
 ## Kaggle competition
 Using the model generated in the above section, I submitted my prediction result to the Kaggle competition portal.
+
+![](kaggle.png)
 
 And the final score is 0.80657 out of 1 using the metric of AUC-ROC.I ranked the 6th amount the whole population. Just slightly lower than the first place with score 0.80819.
 
