@@ -8,10 +8,10 @@ July 23rd, 2019
 
 In traditional markets, customer clustering / segmentation is one of the most significant methods
 used in studies of marketing. This study classifies existing customer cluster/segmentation
-methods into methodology-oriented and application-oriented approaches. Most methodology driven studies used mathematical methodologies; e.g statistics, neural net, generic algorithm (GA)
+methods into methodology-oriented and application-oriented approaches. Most methodology driven studies used mathematical methodologies; e.g. statistics, neural net, generic algorithm (GA)
 and Fuzzy set to identify the optimized segmented homogenous group.
 
-In recent years, it has been recognized that the partitioned clustering technique is Ill suited for
+In recent years, it has been recognized that the partitioned clustering technique is suited for
 clustering a large dataset due to their relatively low computational requirements. Behavioral
 clustering and segmentation help derive strategic marketing initiatives by using the variables that
 determine customer shareholder value. By conducting demographic clustering and segmentation
@@ -45,7 +45,7 @@ Two dataset for customer segmentation analysis:
 
 * *Udacity_CUSTOMERS_052018.csv*: Demographics data for customers of a mail-order company; 191,652 persons (rows) x 369 features (columns)
 
-Because these two datasets are the demographics characteristics of general population and company's customers. It is worthy to explore and compare the clustering analysis betIen these two groups. And match the general population with our customers. Then, I are able to find out the targeted population that share similar behaviors as our current customers. After cleaning these two datasets in similar fashion, I would like to perform clustering analysis on both datasets with same number of clusters. And then these two cluster distributions Ire then compared to see where the strongest customer base for the company is.
+Because these two datasets are the demographics characteristics of general population and company's customers. It is worthy to explore and compare the clustering analysis between these two groups. And match the general population with our customers. Then, I are able to find out the targeted population that share similar behaviors as our current customers. After cleaning these two datasets in similar fashion, I would like to perform clustering analysis on both datasets with same number of clusters. And then these two cluster distributions Ire then compared to see where the strongest customer base for the company is.
 
 Two dataset for customer conversion prediction:
 * *Udacity_MAILOUT_052018_TRAIN.csv*: Demographics data for individuals who Ire targets of a marketing campaign; 42,982 persons (rows) x 367 (columns).
@@ -57,7 +57,7 @@ In addition to the above data, there are two additional meta-data:
 
 * *DIAS Attributes — Values 2017.xlsx*: a detailed mapping of data values for each feature in alphabetical order
 
-After customers segmentation, I also want to build a model that can predict whether a potential customer will convert or not in our mail-out list. HoIver, only train set is retained. The test set is withheld for the purpose of Kaggle competition. In order to train and validate our classifier, I need to split the training set into training subset and validation subset. And because of the highly imbalanced nature of our dataset, I need to apply cross-validation(probably with 10 subsets) to train and validate our model.
+After customers segmentation, I also want to build a model that can predict whether a potential customer will convert or not in our mail-out list. However, only train set is retained. The test set is withheld for the purpose of Kaggle competition. In order to train and validate our classifier, I need to split the training set into training subset and validation subset. And because of the highly imbalanced nature of our dataset, I need to apply cross-validation(probably with 10 subsets) to train and validate our model.
 
 After training and picking out the best kind of model, I may want to use the same train set to do parameters tuning to further improve our model performance. In the meantime, some classifying method may output the feature importance data that can allow us to communicate our result in business language easily.
 
@@ -69,9 +69,9 @@ In the last step, I prefer to use decision tree to repeat the process again for 
 There are 4 steps to finish the project:
 * Data pre-processing: clean and re-encode data.
 
-  Missing values by columns and rows will be analyzed, data will be divided by types folloId by subsequent transformations.
+  Missing values by columns and rows will be analyzed, data will be divided by types followed by subsequent transformations.
 
-* Segmentation:create clusterings of customer and general population, and then identify the difference.
+* Segmentation: create clusters of customer and general population, and then identify the difference.
 
  Use principal component analysis (PCA) technique for dimensionality reduction. Then, elbow and other methods will be used to identify the best number of clusters for clustering algorithm. Finally, apply clustering to make segmentation of population and customers and determine description of target cluster for the company.
 
@@ -89,7 +89,7 @@ There are 4 steps to finish the project:
 Because of the data imbalance, I cannot only use recall and accuracy as metrics to measure the model performance. I should consider TP and FP at the same time. Therefore, using ROC-AUC is much more suitable.
 
 -----------------
-# Results and Discussion
+# Analysis and Results
 
 ## Customer Segmentation
 ![Customer Segmentation Workflow](workflow.png "Workflow of Customer Segmentation")
@@ -173,7 +173,7 @@ For each principal component or dimension, the top 3 and bottom 3 weights with t
 * KBA13_ANTG3-unknown
 * PLZ8_ANTG3-number of 6-10 family houses in the PLZ8
 #### Interpretation:
-The first principal component is strongly correlated with none to very low mobilities and high number of 1-2 family houses. KBA13 is not described in the attributes file but it can be related to car ownership. Higher car owndership and higher number of 6-10 family houses tend to negatively affect this principal component.
+The first principal component is strongly correlated with none to very low mobilities and high number of 1-2 family houses. KBA13 is not described in the attributes file but it can be related to car ownership. Higher car ownership and higher number of 6-10 family houses tend to negatively affect this principal component.
 
 #### Dimension 2:
 * KBA13_HERST_BMW_BENZ-share of BMW & Mercedes Benz within the PLZ8
@@ -223,6 +223,7 @@ The response of our data is highly imbalanced.
 
 ![](mailout.png)
 
+### Algorithm Explanation
 There are a number of approaches to deal with class imbalance which have been already explained by numerous blog posts from different experts. This particular article from Analytics Vidhya describes the following techniques:
 * Random Over-sampling
 * Random Under-sampling
@@ -238,23 +239,69 @@ The above approaches deals with handling imbalanced data by resampling original 
 * Extreme Gradient Boosting
 * Light GBM
 * CatBoost
+
 The AdaBoost,XGBoost and Gradient Tree Boost algorithms will be investigated to determine which is best at modeling the data.
 
-### Model Selection and Tuning
+#### Boosting Method
+The algorithms mentioned above are different kinds of gradient boosting method. Before jumping into the idea of boosting, it will be nice to clearify some basic concepts about ensemble learning.
+
+![](ensemble.png)
+
+Ensemble learning includes bagging and boosting.
+* Bagging is a simple ensembling technique in which we build many independent predictors/models/learners and combine them using some model averaging techniques. (e.g. weighted average, majority vote or normal average)
+
+* Boosting is an ensemble technique in which the predictors are not made independently, but sequentially.
+
+Gradient boosting is a machine learning technique for regression and classification problems, which produces a prediction model in the form of an ensemble of weak prediction models, typically decision trees. It builds the model in a stage-wise fashion like other boosting methods do, and it generalizes them by allowing optimization of an arbitrary differentiable loss function. Here is some main differences among these 3 kinds of boosting algorithms:
+
+* AdaBoost (Adaptive Boosting) uses decision stumps as the weak learners in boosting.
+
+* Gradient Tree boosting uses decision trees as the weak learners in boosting.
+
+* XGBoost(Extreme Gradient Boosting) is similar to Gradient Tree boosting. But it has several good features such as clever penalisation of trees, proportinal shrinking of leaf nodes and using newton boosting method(which makes it generally faster than gradient tree boosting method). Besides the extra randomisation parameter makes the weaker learners less likely to correlated hence increasing the performance.
+
+
+### Model Building
+#### Benchmark Compare
+In the model selection part, I will compare the performance of the above mentioned boosting algorithms and use Adaboost as the benchmark boosting algorithm.
 
 ![](model.png)
 
-After running 3 baseline models, the Gradient Tree Boosting method actually beats other two methods by a small margin. However, the difference is not that much between XGBoost and Gradient Tree Boosting. Considering the training time and tuning time, I will still choose XGBoost. And here is the output of variable importance using the fine-tuned model. The top 10 variables are:
+After running cross validation by dividing the dataset into 5 subsets, the Gradient Tree Boosting method actually beats other two methods by a very small margin.
+
+* Adaboost - the average AUC is 0.751914
+* Gradient Tree Boosting - the average AUC is 0.756641
+* XGBoosting - the average AUC is 0.754345
+
+However, the difference of AUC is not that much between XGBoost and Gradient Tree Boosting. Considering the training time and tuning time, I will still choose XGBoost.
+
+### Final Model Evaluation
+The final model of XGBoost has the following parameters:
+* learning rate=0.01
+* reg_alpha=0.05
+* subsample=0.6
+* colsample_bytree=0.7
+* gamma=0.1
+* max_depth =3
+* min_child_weight =5
+* objective ="binary:logistic"
+* scale_pos_weight =1
+* random_state=28
+And the final score of 5-fold CV is 0.772124 which is much higher than the benchark model by 0.02. In order to test the robustness of our model is to test it using the dataset out of the training set. Therefore, I make use of the *Udacity_MAILOUT_052018_TEST.csv* to predict the response result and then submitted to the Kaggle competition for further analysis. Surprisingly, the model performs even better in testing set. I gets a 0.80657 average AUC.
+
+### Variable importance
+And here is the output of variable importance using the fine-tuned model. The top 10 variables are:
 
 ![](varimp.jpg)
 
 * KBA13_SEG_UTILITIES - share of MUVs/SUVs
 * D19_RATGEBER_RZ - transactional activity based on the product group GUIDEBOOKS
-* LP_LEBENSPHASE_GROB - lifestage rough
+* LP_LEBENSPHASE_GROB - life stage rough
 * KBA05_GBZ - number of buildings in the microcell
 * ZABEOTYP - typification of energy consumers
 * PLZ8_GBZ - number of buildings within the PLZ8
 * OST_WEST_KZ - flag indicating the former GDR/FRG
+
 
 ------------
 ## Kaggle competition
@@ -266,4 +313,52 @@ And the final score is 0.80657 out of 1 using the metric of AUC-ROC.I ranked the
 
 ---------------
 ## Improvement
-In order to save time and wrap up the project as fast as possible, I mainly follow the approach from other posts. If I have more time, I would also try LightGBM and CatBoost because these methods are also famous for fast training and high accuracy. Besides,
+In order to save time and wrap up the project as fast as possible, I mainly follow the approach from other posts. If I have more time, I would also try LightGBM and CatBoost because these methods are also famous for fast training and high accuracy. Besides, I can also try other kinds of imputer and scaler when transforming data.
+
+---------
+## Challenges
+
+There are several challenges I faced:
+
+### Data Cleaning:
+I need to manually prepared the missing data dictionary first by looking through two meta-data files. By carefully documenting their data types and missing value format, I can apply data cleaning. I have uploaded the missing data file for people who want to reproduce my work.
+
+### Parameter Tuning:
+I followed several githubs in applying parameter tuning. The girdsearch method is extremely useful. However, it is hard to select the initial parameter value and tuning so many parameters at the same time. One trick I used is to tune the parameter in terms of their importance.
+1. max_depth and min_child_weight
+2. gamma
+3. subsample and colsample_bytree
+4. reg_alpha
+
+### Pipeline
+The last trick I use to make my code clean is building pipeline. There are two kinds of pipeline I built:
+
+* Data Cleaning Pipeline: After setting the strategy of data cleaning, I wrap up a clean data function for further usage.
+
+* Data transforming Pipeline: I built the pipeline starting from imputing data, scaling data to PCA. This pipeline can be further expanded in model tuning using the following code:
+
+``` python
+# Create initial model
+clf_0 = XGBRegressor(
+    objective = 'binary:logistic', #logistic regression for binary classification
+    scale_pos_weight = 1, #because of high class imbalance
+    random_state = 28)
+
+pipeline = Pipeline([
+        ('imp', imputer),
+        ('scale', scaler),
+        ('clf', clf_0)
+])
+
+parameters_1 = {
+    'clf__max_depth': range(3,10,2),
+    'clf__min_child_weight': range(1,6,2)
+}
+
+# Pass Pipeline into training
+cv = GridSearchCV(estimator=pipeline, param_grid=parameters_1, scoring='roc_auc',n_jobs=-1, iid=False, cv=5)
+
+cv.fit(features_raw, response_raw)
+
+cv.grid_scores_, cv.best_params_, cv.best_score_
+```

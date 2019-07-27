@@ -590,9 +590,9 @@ July 23rd, 2019</p>
 <h3 id="background-and-introduction">Background and Introduction</h3>
 <p>In traditional markets, customer clustering / segmentation is one of the most significant methods
 used in studies of marketing. This study classifies existing customer cluster/segmentation
-methods into methodology-oriented and application-oriented approaches. Most methodology driven studies used mathematical methodologies; e.g statistics, neural net, generic algorithm (GA)
+methods into methodology-oriented and application-oriented approaches. Most methodology driven studies used mathematical methodologies; e.g. statistics, neural net, generic algorithm (GA)
 and Fuzzy set to identify the optimized segmented homogenous group.</p>
-<p>In recent years, it has been recognized that the partitioned clustering technique is Ill suited for
+<p>In recent years, it has been recognized that the partitioned clustering technique is suited for
 clustering a large dataset due to their relatively low computational requirements. Behavioral
 clustering and segmentation help derive strategic marketing initiatives by using the variables that
 determine customer shareholder value. By conducting demographic clustering and segmentation
@@ -618,7 +618,7 @@ MINING TECHNIQUE</em></a> by Dr. Sankar Rajagopal from Tata Consultancy Services
 <li><p><em>Udacity_CUSTOMERS_052018.csv</em>: Demographics data for customers of a mail-order company; 191,652 persons (rows) x 369 features (columns)</p>
 </li>
 </ul>
-<p>Because these two datasets are the demographics characteristics of general population and company's customers. It is worthy to explore and compare the clustering analysis betIen these two groups. And match the general population with our customers. Then, I are able to find out the targeted population that share similar behaviors as our current customers. After cleaning these two datasets in similar fashion, I would like to perform clustering analysis on both datasets with same number of clusters. And then these two cluster distributions Ire then compared to see where the strongest customer base for the company is.</p>
+<p>Because these two datasets are the demographics characteristics of general population and company's customers. It is worthy to explore and compare the clustering analysis between these two groups. And match the general population with our customers. Then, I are able to find out the targeted population that share similar behaviors as our current customers. After cleaning these two datasets in similar fashion, I would like to perform clustering analysis on both datasets with same number of clusters. And then these two cluster distributions Ire then compared to see where the strongest customer base for the company is.</p>
 <p>Two dataset for customer conversion prediction:</p>
 <ul>
 <li><p><em>Udacity_MAILOUT_052018_TRAIN.csv</em>: Demographics data for individuals who Ire targets of a marketing campaign; 42,982 persons (rows) x 367 (columns).</p>
@@ -631,7 +631,7 @@ In addition to the above data, there are two additional meta-data:</p>
 <li><p><em>DIAS Attributes — Values 2017.xlsx</em>: a detailed mapping of data values for each feature in alphabetical order</p>
 </li>
 </ul>
-<p>After customers segmentation, I also want to build a model that can predict whether a potential customer will convert or not in our mail-out list. HoIver, only train set is retained. The test set is withheld for the purpose of Kaggle competition. In order to train and validate our classifier, I need to split the training set into training subset and validation subset. And because of the highly imbalanced nature of our dataset, I need to apply cross-validation(probably with 10 subsets) to train and validate our model.</p>
+<p>After customers segmentation, I also want to build a model that can predict whether a potential customer will convert or not in our mail-out list. However, only train set is retained. The test set is withheld for the purpose of Kaggle competition. In order to train and validate our classifier, I need to split the training set into training subset and validation subset. And because of the highly imbalanced nature of our dataset, I need to apply cross-validation(probably with 10 subsets) to train and validate our model.</p>
 <p>After training and picking out the best kind of model, I may want to use the same train set to do parameters tuning to further improve our model performance. In the meantime, some classifying method may output the feature importance data that can allow us to communicate our result in business language easily.</p>
 <p>In the last step, I prefer to use decision tree to repeat the process again for the sake of better understand and visualize classification results.</p>
 <hr>
@@ -639,9 +639,9 @@ In addition to the above data, there are two additional meta-data:</p>
 <p>There are 4 steps to finish the project:</p>
 <ul>
 <li><p>Data pre-processing: clean and re-encode data.</p>
-<p>Missing values by columns and rows will be analyzed, data will be divided by types folloId by subsequent transformations.</p>
+<p>Missing values by columns and rows will be analyzed, data will be divided by types followed by subsequent transformations.</p>
 </li>
-<li><p>Segmentation:create clusterings of customer and general population, and then identify the difference.</p>
+<li><p>Segmentation: create clusters of customer and general population, and then identify the difference.</p>
 <p>Use principal component analysis (PCA) technique for dimensionality reduction. Then, elbow and other methods will be used to identify the best number of clusters for clustering algorithm. Finally, apply clustering to make segmentation of population and customers and determine description of target cluster for the company.</p>
 </li>
 <li><p>Prediction: use the demographic features to predict whether or not a person became a customer after a mail-out campaign.</p>
@@ -655,13 +655,13 @@ In addition to the above data, there are two additional meta-data:</p>
 <h2 id="evaluation-metrics">Evaluation Metrics</h2>
 <p>Because of the data imbalance, I cannot only use recall and accuracy as metrics to measure the model performance. I should consider TP and FP at the same time. Therefore, using ROC-AUC is much more suitable.</p>
 <hr>
-<h1 id="results-and-discussion">Results and Discussion</h1>
+<h1 id="analysis-and-results">Analysis and Results</h1>
 <h2 id="customer-segmentation">Customer Segmentation</h2>
-<h2 id="customer-segmentation-workflow"><img title="Workflow of Customer Segmentation" alt="Customer Segmentation Workflow" src="/Users/zhongming/Documents/GitHub/Capstone Project/image/workflow.png"></h2>
+<h2 id="customer-segmentation-workflow"><img title="Workflow of Customer Segmentation" alt="Customer Segmentation Workflow" src="C:\Users\zhongm6\Downloads\archive\silverbulletKID-Capstone-Project-c9161d8\image\workflow.png"></h2>
 <h3 id="data-preprocessing">Data Preprocessing</h3>
 <h4 id="missing-value-dictionary">Missing Value Dictionary</h4>
 <p>After long hours of manual work, I general a csv file documented the missing value of every attributes mentions inside the meta-data file.</p>
-<p><img title="Workflow of Customer Segmentation" alt="" src="/Users/zhongming/Documents/GitHub/Capstone Project/image/feature.jpg"></p>
+<p><img title="Workflow of Customer Segmentation" alt="" src="C:\Users\zhongm6\Downloads\archive\silverbulletKID-Capstone-Project-c9161d8\image\feature.jpg"></p>
 <ul>
 <li><p>Delete the variables found in the meta-data file but not found in the general population.</p>
 </li>
@@ -669,23 +669,23 @@ In addition to the above data, there are two additional meta-data:</p>
 </li>
 </ul>
 <p>First I append these variables inside the missing value manual file to enlarge our missing value documentation for further NA analysis. Then I replace those missing_or_unknown inside the dataset with NaN.</p>
-<p><img title="Workflow of Customer Segmentation" alt="" src="/Users/zhongming/Documents/GitHub/Capstone Project/image/new_feature.jpg"></p>
+<p><img title="Workflow of Customer Segmentation" alt="" src="C:\Users\zhongm6\Downloads\archive\silverbulletKID-Capstone-Project-c9161d8\image\new_feature.jpg"></p>
 <h4 id="assess-missing-data">Assess Missing Data</h4>
-<p><img title="Workflow of Customer Segmentation" alt="" src="/Users/zhongming/Documents/GitHub/Capstone Project/image/access_NA.jpg"></p>
+<p><img title="Workflow of Customer Segmentation" alt="" src="C:\Users\zhongm6\Downloads\archive\silverbulletKID-Capstone-Project-c9161d8\image\access_NA.jpg"></p>
 <p>By plotting the percentage of missing value in each variables, I am able to tell that most of the variables are missing less than 30% of data.</p>
-<p><img alt="" src="/Users/zhongming/Documents/GitHub/Capstone Project/image/assess_NA_3.jpg"></p>
+<p><img alt="" src="C:\Users\zhongm6\Downloads\archive\silverbulletKID-Capstone-Project-c9161d8\image\assess_NA_3.jpg"></p>
 <p>Therefore, it is reasonable to set 30% as a cutoff value to clean our data. I drop the variables that have over 30% missing values.</p>
 <h3 id="re-encode-features">Re-encode features</h3>
 <h4 id="variables-type-identification">Variables Type Identification</h4>
 <p>Inside the <em>new_feature.csv</em>, I already identified most of the data variable types. However, after including some new variables from the general population dataset, I need to further investigate the data distribution of these new variables and try to identify their data types.</p>
-<p><img alt="" src="/Users/zhongming/Documents/GitHub/Capstone Project/image/egvariable.jpg"></p>
+<p><img alt="" src="C:\Users\zhongm6\Downloads\archive\silverbulletKID-Capstone-Project-c9161d8\image\egvariable.jpg"></p>
 <p>For example, the variable VK_ZG11 has 10 types of output, which means it could possibly be a categorical or ordinal variable. Combining with the data name and compared it with the existing variable names in our meta-data files, I can assume that this is an ordinal variable.</p>
 <p>After tedious manual work, I can roughly classify our new variables into numerical, ordinal, categorical and mixed data types.</p>
 <h5 id="categorical-variables">Categorical variables</h5>
 <p>For the categorical variable, I can go further and identify that whether they are binary or multilevel variables for the purpose of one-hot encoding.</p>
 <h5 id="mixed-type-variables">Mixed-Type variables</h5>
 <p>After taking a look at several project reports online, I realize that this Mixed-Type variables engineering is the key point to boost your prediction result in Kaggle competition. There are totally 6 variables that are mixed types.</p>
-<p><img alt="" src="/Users/zhongming/Documents/GitHub/Capstone Project/image/mixed_feature.jpg"></p>
+<p><img alt="" src="C:\Users\zhongm6\Downloads\archive\silverbulletKID-Capstone-Project-c9161d8\image\mixed_feature.jpg"></p>
 <p>By digging into the definition of every variables via meta-data files, I choose to reengineer the 'PRAEGENDE_JUGENDJAHRE' and 'CAMEO_INTL_2015'.</p>
 <ul>
 <li><p><em>PRAEGENDE_JUGENDJAHRE</em> - combines information on three dimensions: generation by decade, movement (mainstream vs. avantgarde), and nation (east vs. west). Three new variables will be created to capture the other two dimensions: an interval-type variable for decade, and two binary variables for movement and nation.</p>
@@ -699,7 +699,7 @@ In addition to the above data, there are two additional meta-data:</p>
 <p>After formatting the strategy in cleaning data, I build a clean_data function in order to process the incoming new dataset in the same way.</p>
 <h3 id="feature-transformations">Feature transformations</h3>
 <p>After replacing missing value with column' mean and scale our data, it is natural to perform dimension reduction for computational simplicity.</p>
-<p><img alt="" src="/Users/zhongming/Documents/GitHub/Capstone Project/image/pca.jpg"></p>
+<p><img alt="" src="C:\Users\zhongm6\Downloads\archive\silverbulletKID-Capstone-Project-c9161d8\image\pca.jpg"></p>
 <p>By reducing the dimensions to 300, the first 300 components can still explain 86% of our data.</p>
 <h3 id="component-analysis">Component analysis</h3>
 <p>For each principal component or dimension, the top 3 and bottom 3 weights with their corresponding feature names will be investigated for any associations.</p>
@@ -711,7 +711,7 @@ In addition to the above data, there are two additional meta-data:</p>
 <li>KBA13_ANTG4-unknown</li>
 <li>KBA13_ANTG3-unknown</li>
 <li>PLZ8_ANTG3-number of 6-10 family houses in the PLZ8<h4 id="interpretation">Interpretation:</h4>
-The first principal component is strongly correlated with none to very low mobilities and high number of 1-2 family houses. KBA13 is not described in the attributes file but it can be related to car ownership. Higher car owndership and higher number of 6-10 family houses tend to negatively affect this principal component.</li>
+The first principal component is strongly correlated with none to very low mobilities and high number of 1-2 family houses. KBA13 is not described in the attributes file but it can be related to car ownership. Higher car ownership and higher number of 6-10 family houses tend to negatively affect this principal component.</li>
 </ul>
 <h4 id="dimension-2">Dimension 2:</h4>
 <ul>
@@ -736,21 +736,22 @@ The third principal component increases with more recent decade of the dominatin
 <h3 id="clustering-analysis">Clustering analysis</h3>
 <h4 id="pick-number-of-clusters">Pick number of clusters</h4>
 <p>The scree plot shows that the score or the sum of the squared errors (SSE) generally decreased as the number of clusters increased.</p>
-<p><img alt="" src="/Users/zhongming/Documents/GitHub/Capstone Project/image/ncluster.jpg"></p>
+<p><img alt="" src="C:\Users\zhongm6\Downloads\archive\silverbulletKID-Capstone-Project-c9161d8\image\ncluster.jpg"></p>
 <p>The 'elbow method' is not applicable in the plot because there is no visible leveling observed. Even though 30 clusters did not produce the lowest SSE, it was still used as the number of clusters for the full KMeans clustering operation.
-<img alt="" src="/Users/zhongming/Documents/GitHub/Capstone Project/image/clustergp.png"></p>
-<p><img alt="" src="/Users/zhongming/Documents/GitHub/Capstone Project/image/clusterct.png"></p>
+<img alt="" src="C:\Users\zhongm6\Downloads\archive\silverbulletKID-Capstone-Project-c9161d8\image\clustergp.png"></p>
+<p><img alt="" src="C:\Users\zhongm6\Downloads\archive\silverbulletKID-Capstone-Project-c9161d8\image\clusterct.png"></p>
 <h4 id="compare-customers-to-general-population">Compare Customers to general Population</h4>
-<p><img alt="" src="/Users/zhongming/Documents/GitHub/Capstone Project/image/diff.png"></p>
+<p><img alt="" src="C:\Users\zhongm6\Downloads\archive\silverbulletKID-Capstone-Project-c9161d8\image\diff.png"></p>
 <p>After calculating the proportion difference between 2 datasets' clusters, I can tell that cluster 2 is over-represented and cluster 22 is under-represented. For simplicity, I only compared the variables mentioned in the PCA sections.</p>
-<p><img alt="" src="/Users/zhongming/Documents/GitHub/Capstone Project/image/groupdiff.png"></p>
+<p><img alt="" src="C:\Users\zhongm6\Downloads\archive\silverbulletKID-Capstone-Project-c9161d8\image\groupdiff.png"></p>
 <p>By comparing these two clusters, two out of the ten features above are clearly different. These are FINANZ_ANLEGER, DECADE. The target customers have less recent dominating movements in their youths which probably means they are older, and have less potential to invest.</p>
 <hr>
 <h2 id="customer-conversion-prediction">Customer Conversion Prediction</h2>
 <h3 id="data-exploration">Data Exploration</h3>
-<p><img alt="" src="/Users/zhongming/Documents/GitHub/Capstone Project/image/capston.png"></p>
+<p><img alt="" src="C:\Users\zhongm6\Downloads\archive\silverbulletKID-Capstone-Project-c9161d8\image\capston.png"></p>
 <p>The response of our data is highly imbalanced.</p>
-<p><img alt="" src="/Users/zhongming/Documents/GitHub/Capstone Project/image/mailout.png"></p>
+<p><img alt="" src="C:\Users\zhongm6\Downloads\archive\silverbulletKID-Capstone-Project-c9161d8\image\mailout.png"></p>
+<h3 id="algorithm-explanation">Algorithm Explanation</h3>
 <p>There are a number of approaches to deal with class imbalance which have been already explained by numerous blog posts from different experts. This particular article from Analytics Vidhya describes the following techniques:</p>
 <ul>
 <li>Random Over-sampling</li>
@@ -767,17 +768,61 @@ The third principal component increases with more recent decade of the dominatin
 <li>Gradient Tree Boosting</li>
 <li>Extreme Gradient Boosting</li>
 <li>Light GBM</li>
-<li>CatBoost
-The AdaBoost,XGBoost and Gradient Tree Boost algorithms will be investigated to determine which is best at modeling the data.</li>
+<li>CatBoost</li>
 </ul>
-<h3 id="model-selection-and-tuning">Model Selection and Tuning</h3>
-<p><img alt="" src="/Users/zhongming/Documents/GitHub/Capstone Project/image/model.png"></p>
-<p>After running 3 baseline models, the Gradient Tree Boosting method actually beats other two methods by a small margin. However, the difference is not that much between XGBoost and Gradient Tree Boosting. Considering the training time and tuning time, I will still choose XGBoost. And here is the output of variable importance using the fine-tuned model. The top 10 variables are:</p>
-<p><img alt="" src="/Users/zhongming/Documents/GitHub/Capstone Project/image/varimp.jpg"></p>
+<p>The AdaBoost,XGBoost and Gradient Tree Boost algorithms will be investigated to determine which is best at modeling the data.</p>
+<h4 id="boosting-method">Boosting Method</h4>
+<p>The algorithms mentioned above are different kinds of gradient boosting method. Before jumping into the idea of boosting, it will be nice to clearify some basic concepts about ensemble learning.</p>
+<p><img alt="" src="C:\Users\zhongm6\Downloads\archive\silverbulletKID-Capstone-Project-c9161d8\image\ensemble.png"></p>
+<p>Ensemble learning includes bagging and boosting.</p>
+<ul>
+<li><p>Bagging is a simple ensembling technique in which we build many independent predictors/models/learners and combine them using some model averaging techniques. (e.g. weighted average, majority vote or normal average)</p>
+</li>
+<li><p>Boosting is an ensemble technique in which the predictors are not made independently, but sequentially.</p>
+</li>
+</ul>
+<p>Gradient boosting is a machine learning technique for regression and classification problems, which produces a prediction model in the form of an ensemble of weak prediction models, typically decision trees. It builds the model in a stage-wise fashion like other boosting methods do, and it generalizes them by allowing optimization of an arbitrary differentiable loss function. Here is some main differences among these 3 kinds of boosting algorithms:</p>
+<ul>
+<li><p>AdaBoost (Adaptive Boosting) uses decision stumps as the weak learners in boosting.</p>
+</li>
+<li><p>Gradient Tree boosting uses decision trees as the weak learners in boosting.</p>
+</li>
+<li><p>XGBoost(Extreme Gradient Boosting) is similar to Gradient Tree boosting. But it has several good features such as clever penalisation of trees, proportinal shrinking of leaf nodes and using newton boosting method(which makes it generally faster than gradient tree boosting method). Besides the extra randomisation parameter makes the weaker learners less likely to correlated hence increasing the performance.</p>
+</li>
+</ul>
+<h3 id="model-building">Model Building</h3>
+<h4 id="benchmark-compare">Benchmark Compare</h4>
+<p>In the model selection part, I will compare the performance of the above mentioned boosting algorithms and use Adaboost as the benchmark boosting algorithm.</p>
+<p><img alt="" src="C:\Users\zhongm6\Downloads\archive\silverbulletKID-Capstone-Project-c9161d8\image\model.png"></p>
+<p>After running cross validation by dividing the dataset into 5 subsets, the Gradient Tree Boosting method actually beats other two methods by a very small margin.</p>
+<ul>
+<li>Adaboost - the average AUC is 0.751914</li>
+<li>Gradient Tree Boosting - the average AUC is 0.756641</li>
+<li>XGBoosting - the average AUC is 0.754345</li>
+</ul>
+<p>However, the difference of AUC is not that much between XGBoost and Gradient Tree Boosting. Considering the training time and tuning time, I will still choose XGBoost.</p>
+<h3 id="final-model-evaluation">Final Model Evaluation</h3>
+<p>The final model of XGBoost has the following parameters:</p>
+<ul>
+<li>learning rate=0.01</li>
+<li>reg_alpha=0.05</li>
+<li>subsample=0.6</li>
+<li>colsample_bytree=0.7</li>
+<li>gamma=0.1</li>
+<li>max_depth =3</li>
+<li>min_child_weight =5</li>
+<li>objective ="binary:logistic"</li>
+<li>scale_pos_weight =1</li>
+<li>random_state=28
+And the final score of 5-fold CV is 0.772124 which is much higher than the benchark model by 0.02. In order to test the robustness of our model is to test it using the dataset out of the training set. Therefore, I make use of the <em>Udacity_MAILOUT_052018_TEST.csv</em> to predict the response result and then submitted to the Kaggle competition for further analysis. Surprisingly, the model performs even better in testing set. I gets a 0.80657 average AUC.</li>
+</ul>
+<h3 id="variable-importance">Variable importance</h3>
+<p>And here is the output of variable importance using the fine-tuned model. The top 10 variables are:</p>
+<p><img alt="" src="C:\Users\zhongm6\Downloads\archive\silverbulletKID-Capstone-Project-c9161d8\image\varimp.jpg"></p>
 <ul>
 <li>KBA13_SEG_UTILITIES - share of MUVs/SUVs</li>
 <li>D19_RATGEBER_RZ - transactional activity based on the product group GUIDEBOOKS</li>
-<li>LP_LEBENSPHASE_GROB - lifestage rough</li>
+<li>LP_LEBENSPHASE_GROB - life stage rough</li>
 <li>KBA05_GBZ - number of buildings in the microcell</li>
 <li>ZABEOTYP - typification of energy consumers</li>
 <li>PLZ8_GBZ - number of buildings within the PLZ8</li>
@@ -786,9 +831,31 @@ The AdaBoost,XGBoost and Gradient Tree Boost algorithms will be investigated to 
 <hr>
 <h2 id="kaggle-competition">Kaggle competition</h2>
 <p>Using the model generated in the above section, I submitted my prediction result to the Kaggle competition portal.</p>
-<p><img alt="" src="/Users/zhongming/Documents/GitHub/Capstone Project/image/kaggle.png"></p>
+<p><img alt="" src="C:\Users\zhongm6\Downloads\archive\silverbulletKID-Capstone-Project-c9161d8\image\kaggle.png"></p>
 <p>And the final score is 0.80657 out of 1 using the metric of AUC-ROC.I ranked the 6th amount the whole population. Just slightly lower than the first place with score 0.80819.</p>
 <hr>
 <h2 id="improvement">Improvement</h2>
-<p>In order to save time and wrap up the project as fast as possible, I mainly follow the approach from other posts. If I have more time, I would also try LightGBM and CatBoost because these methods are also famous for fast training and high accuracy. Besides,</p></body>
+<p>In order to save time and wrap up the project as fast as possible, I mainly follow the approach from other posts. If I have more time, I would also try LightGBM and CatBoost because these methods are also famous for fast training and high accuracy. Besides, I can also try other kinds of imputer and scaler when transforming data.</p>
+<hr>
+<h2 id="challenges">Challenges</h2>
+<p>There are several challenges I faced:</p>
+<h3 id="data-cleaning">Data Cleaning:</h3>
+<p>I need to manually prepared the missing data dictionary first by looking through two meta-data files. By carefully documenting their data types and missing value format, I can apply data cleaning. I have uploaded the missing data file for people who want to reproduce my work.</p>
+<h3 id="parameter-tuning">Parameter Tuning:</h3>
+<p>I followed several githubs in applying parameter tuning. The girdsearch method is extremely useful. However, it is hard to select the initial parameter value and tuning so many parameters at the same time. One trick I used is to tune the parameter in terms of their importance.</p>
+<ol>
+<li>max_depth and min_child_weight</li>
+<li>gamma</li>
+<li>subsample and colsample_bytree</li>
+<li>reg_alpha</li>
+</ol>
+<h3 id="pipeline">Pipeline</h3>
+<p>The last trick I use to make my code clean is building pipeline. There are two kinds of pipeline I built:</p>
+<ul>
+<li><p>Data Cleaning Pipeline: After setting the strategy of data cleaning, I wrap up a clean data function for further usage.</p>
+</li>
+<li><p>Data transforming Pipeline: I built the pipeline starting from imputing data, scaling data to PCA. This pipeline can be further expanded in model tuning using the following code:</p>
+</li>
+</ul>
+<pre class="editor-colors lang-python"><div class="line"><span class="syntax--source syntax--python"><span class="syntax--comment syntax--line"># Create initial model</span></span></div><div class="line"><span class="syntax--source syntax--python">clf_0 <span class="syntax--keyword syntax--operator">=</span> <span class="syntax--entity syntax--name syntax--function">XGBRegressor</span>(</span></div><div class="line"><span class="syntax--source syntax--python"><span class="leading-whitespace">    </span><span class="syntax--variable syntax--parameter syntax--function">objective</span> <span class="syntax--keyword syntax--operator">=</span> <span class="syntax--string syntax--quoted">'binary:logistic'</span>, <span class="syntax--comment syntax--line">#logistic regression for binary classification</span></span></div><div class="line"><span class="syntax--source syntax--python"><span class="leading-whitespace">    </span><span class="syntax--variable syntax--parameter syntax--function">scale_pos_weight</span> <span class="syntax--keyword syntax--operator">=</span> <span class="syntax--constant syntax--numeric">1</span>, <span class="syntax--comment syntax--line">#because of high class imbalance</span></span></div><div class="line"><span class="syntax--source syntax--python"><span class="leading-whitespace">    </span><span class="syntax--variable syntax--parameter syntax--function">random_state</span> <span class="syntax--keyword syntax--operator">=</span> <span class="syntax--constant syntax--numeric">28</span>)</span></div><div class="line"></div><div class="line"><span class="syntax--source syntax--python">pipeline <span class="syntax--keyword syntax--operator">=</span> <span class="syntax--entity syntax--name syntax--function">Pipeline</span>([</span></div><div class="line"><span class="syntax--source syntax--python"><span class="leading-whitespace">        </span>(<span class="syntax--string syntax--quoted">'imp'</span>, imputer),</span></div><div class="line"><span class="syntax--source syntax--python"><span class="leading-whitespace">        </span>(<span class="syntax--string syntax--quoted">'scale'</span>, scaler),</span></div><div class="line"><span class="syntax--source syntax--python"><span class="leading-whitespace">        </span>(<span class="syntax--string syntax--quoted">'clf'</span>, clf_0)</span></div><div class="line"><span class="syntax--source syntax--python">])</span></div><div class="line"></div><div class="line"><span class="syntax--source syntax--python">parameters_1 <span class="syntax--keyword syntax--operator">=</span> {</span></div><div class="line"><span class="syntax--source syntax--python"><span class="leading-whitespace">    </span><span class="syntax--string syntax--quoted">'clf__max_depth'</span>: <span class="syntax--support syntax--function">range</span>(<span class="syntax--constant syntax--numeric">3</span>,<span class="syntax--constant syntax--numeric">10</span>,<span class="syntax--constant syntax--numeric">2</span>),</span></div><div class="line"><span class="syntax--source syntax--python"><span class="leading-whitespace">    </span><span class="syntax--string syntax--quoted">'clf__min_child_weight'</span>: <span class="syntax--support syntax--function">range</span>(<span class="syntax--constant syntax--numeric">1</span>,<span class="syntax--constant syntax--numeric">6</span>,<span class="syntax--constant syntax--numeric">2</span>)</span></div><div class="line"><span class="syntax--source syntax--python">}</span></div><div class="line"></div><div class="line"><span class="syntax--source syntax--python"><span class="syntax--comment syntax--line"># Pass Pipeline into training</span></span></div><div class="line"><span class="syntax--source syntax--python">cv <span class="syntax--keyword syntax--operator">=</span> <span class="syntax--entity syntax--name syntax--function">GridSearchCV</span>(<span class="syntax--variable syntax--parameter syntax--function">estimator</span><span class="syntax--keyword syntax--operator">=</span>pipeline, <span class="syntax--variable syntax--parameter syntax--function">param_grid</span><span class="syntax--keyword syntax--operator">=</span>parameters_1, <span class="syntax--variable syntax--parameter syntax--function">scoring</span><span class="syntax--keyword syntax--operator">=</span><span class="syntax--string syntax--quoted">'roc_auc'</span>,<span class="syntax--variable syntax--parameter syntax--function">n_jobs</span><span class="syntax--keyword syntax--operator">=</span><span class="syntax--keyword syntax--operator">-</span><span class="syntax--constant syntax--numeric">1</span>, <span class="syntax--variable syntax--parameter syntax--function">iid</span><span class="syntax--keyword syntax--operator">=</span><span class="syntax--constant syntax--language">False</span>, <span class="syntax--variable syntax--parameter syntax--function">cv</span><span class="syntax--keyword syntax--operator">=</span><span class="syntax--constant syntax--numeric">5</span>)</span></div><div class="line"></div><div class="line"><span class="syntax--source syntax--python">cv.<span class="syntax--entity syntax--name syntax--function">fit</span>(features_raw, response_raw)</span></div><div class="line"></div><div class="line"><span class="syntax--source syntax--python">cv.<span class="syntax--variable syntax--other syntax--object syntax--property">grid_scores_</span>, cv.<span class="syntax--variable syntax--other syntax--object syntax--property">best_params_</span>, cv.<span class="syntax--variable syntax--other syntax--object syntax--property">best_score_</span></span></div></pre></body>
       </html>
